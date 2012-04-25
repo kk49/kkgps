@@ -1,0 +1,41 @@
+Review use of T_GD
+
+problem with signal going below threshold losing C/A sync
+
+try loading signal data as s16 all the way into the correlator 
+functions to see if this helps with bandwidth issues, 
+this will require s16->f32 conversion (sse?) at corr Func .
+
+also try s16 for cos/sin + s8 for spreading code? 
+
+Display Lat, Long for user position
+
+Decode Subframes 4 + 5
+  Update PRNS for atomosphere
+  ...
+
+Assembly / Intrinsic Correlators
+
+TOW roll over mitigation in subframe/word syncronization
+  TOW for subframe is (msg.TOW + MAX_TOW - 1) % MAX_TOW  
+
+Kalmen filter 
+  
+Real Data Processing:
+  PLL + DLL
+  AGC
+  Figure how to calculate corrilation threshold for real data
+    possible keep two sums one of correlator the other of abs(signal)
+  Real Hardware/Data
+  
+Altivec Correlator
+
+
+DONE:
+Replace library code with my own code for least squares routines / matrix inversion
+Generates test data from Frames I got from Garmin GPS (Upconversion + Spreading)
+Downconverstion, Despreading, Search & Tracking
+Decode Subframes 1,2,3
+Samples the correlators every second
+Attempts to Calculate User position
+Get orbits to work 
